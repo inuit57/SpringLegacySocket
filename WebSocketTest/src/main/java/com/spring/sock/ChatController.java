@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.HtmlUtils;
 
@@ -16,6 +17,12 @@ public class ChatController {
 	
 	@RequestMapping("/chatting")
 	public String goChatRoom() {
+		return "chatting" ; 
+	}
+	
+	
+	@RequestMapping("/chatting/{roomId}")
+	public String goChatRoom(@PathVariable String roomId) {
 		return "chatting" ; 
 	}
 	
