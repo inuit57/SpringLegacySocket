@@ -19,6 +19,7 @@
 <script type="text/javascript">
 var stompClient = null;
 
+// 채팅방 번호를 주소줄에서 잘라서 가져왔다. 
 var roomId = document.location.href.split('/')[5];
 
 function setConnected(connected) {
@@ -34,8 +35,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-// 	alert(document.location.href);
-// 	alert(document.location.href.split('/')[5]);
+	// 이렇게 해줘야 연결이 되더라. contextPath 넣어줘야.
     var socket = new SockJS('${pageContext.request.contextPath}/gs-guide-websocket');
     console.log("new sockjs"); 
     console.log(socket);
@@ -61,7 +61,12 @@ function connect() {
     });
 }
 
+// 연결 종료 시 방에서 퇴장하였다는 메시지를 출력해주고 방에서 나가게 할 것. 
+// 또한, DB 쪽에도 처리할 수 있도록 컨트롤러에게도 뭔가 보내줘야 한다. 
 function disconnect() {
+	
+	// stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+	
     if (stompClient !== null) {
         stompClient.disconnect();
     }
@@ -81,6 +86,9 @@ function sendChat() {
 	stompClient.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()})); 
 }
 
+// 채팅방 별로 처리하기 위한 용도
+// 메시지 형태에 대해서는 바꿔줘야할 수도. 
+// DB에 저장되는 것을 생각한다면 roomId 값도 줘야한다. 
 function sendChat2() {
 	stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()})); 
 }
@@ -93,6 +101,7 @@ function showGreeting2(message) {
     $("#greetings").append("<tr><td>" +"test :"+ message + "</td></tr>");
 }
 
+// 채팅이 보여지는 부분.
 function showChat(chat) {
   if( $("#name").val() == chat.name){
   	$("#greetings").append("<tr><td align='right'>" + chat.name + " :: " + chat.message + "</td></tr>");

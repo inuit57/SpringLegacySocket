@@ -20,9 +20,20 @@ public class ChatController {
 		return "chatting" ; 
 	}
 	
-	
+	// 다중 채팅방 전용 
+	// DB에서 읽어와서 roomId가 들어간 주소를 호출한다. 
 	@RequestMapping("/chatting/{roomId}")
 	public String goChatRoom(@PathVariable String roomId) {
+		
+		// 보내주기 전에 검사할 것
+		// roomId 와 session에 저장된 유저 정보를 가지고 DB로 가서
+		// 현재 방에 포함된 인원인지 확인하기 
+		
+		// 만약 1:1 채팅방인데 잘못 들어온 거라면 
+		// 잘못된 접근으로 처리하기 
+		
+		// 경매 채팅방이라면 그냥 바로 들어오도록 처리하기
+		// 1:1 채팅방과 경매 채팅방을 구분해줘야 할까? 
 		return "chatting" ; 
 	}
 	
