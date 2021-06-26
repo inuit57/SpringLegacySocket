@@ -3,6 +3,7 @@ package com.spring.sock;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,16 @@ public class ChatController {
 	
 	@RequestMapping("/chatting")
 	public String goChatRoom() {
+		return "chatting" ; 
+	}
+	
+	@RequestMapping("/chatting/1")
+	public String goChatRoom1() {
+		return "chatting" ; 
+	}
+	
+	@RequestMapping("/chatting/2")
+	public String goChatRoom2() {
 		return "chatting" ; 
 	}
 
@@ -36,12 +47,22 @@ public class ChatController {
 //    @SendTo("/subscribe/chat/{roomNo}")
 	@MessageMapping("/chat")
   	@SendTo("/topic/chat")
-    public Chat broadcasting(Chat chat) {
+	public Chat broadcasting(Chat chat) {
     	Date date = new Date(System.currentTimeMillis()); 
 	    SimpleDateFormat format = new SimpleDateFormat("HH:mm"); 
 	    String now_time = format.format(date); 
 	    return new Chat(chat.getName(), chat.getMessage()+"---"+now_time );
-        
     }
     
+	
+	@MessageMapping("/chat/{roomId}")
+  	@SendTo("/topic/chat/{roomId}")
+	public Chat broadcasting2(@DestinationVariable String roomId, Chat chat) {
+    	Date date = new Date(System.currentTimeMillis()); 
+	    SimpleDateFormat format = new SimpleDateFormat("HH:mm"); 
+	    String now_time = format.format(date); 
+	    return new Chat(chat.getName(), chat.getMessage()+"---"+now_time );
+    }
+	
+
 }

@@ -7,8 +7,19 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js" integrity="sha512-tL4PIUsPy+Rks1go4kQG8M8/ItpRMvKnbBjQm4d2DQnFwgcBYRRN00QdyQnWSCwNMsoY/MfJY8nHp2CzlNdtZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 var stompClient = null;
+
+var roomId = document.location.href.split('/')[5];
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -23,7 +34,8 @@ function setConnected(connected) {
 }
 
 function connect() {
-	alert("test");
+// 	alert(document.location.href);
+// 	alert(document.location.href.split('/')[5]);
     var socket = new SockJS('${pageContext.request.contextPath}/gs-guide-websocket');
     console.log("new sockjs"); 
     console.log(socket);
@@ -40,6 +52,10 @@ function connect() {
         });
         
         stompClient.subscribe('/topic/chat', function (chat) {
+    		showChat(JSON.parse(chat.body));
+    	});
+        
+        stompClient.subscribe('/topic/chat/'+roomId, function (chat) {
     		showChat(JSON.parse(chat.body));
     	});
     });
@@ -63,6 +79,10 @@ function sendName2() {
 
 function sendChat() {
 	stompClient.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()})); 
+}
+
+function sendChat2() {
+	stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()})); 
 }
 
 function showGreeting(message) {
@@ -90,7 +110,8 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
     $( "#send2" ).click(function() { sendName2(); });
-    $( "#chatSend" ).click(function(){ sendChat(); }); 
+    //$( "#chatSend" ).click(function(){ sendChat(); }); 
+    $( "#chatSend" ).click(function(){ sendChat2(); }); 
 });
 
 </script>

@@ -10,5 +10,9 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<a href="./chatting/1">1번 채팅방</a><br>
+<a href="./chatting/2">1번 채팅방</a> <br>
+
 </body>
 </html>
