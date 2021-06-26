@@ -42,7 +42,7 @@ public class ChatController {
 	    Thread.sleep(1000); // simulated delay
 	    return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
 	  }
-
+	
 	  @MessageMapping("/hello2")
 	  @SendTo("/topic/greetings2")
 	  public Greeting greeting2(HelloMessage message) throws Exception {
@@ -50,8 +50,6 @@ public class ChatController {
 	    return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
 	  }
 	
-//    @MessageMapping("/hello/{roomNo}")
-//    @SendTo("/subscribe/chat/{roomNo}")
 	@MessageMapping("/chat")
   	@SendTo("/topic/chat")
 	public Chat broadcasting(Chat chat) {
