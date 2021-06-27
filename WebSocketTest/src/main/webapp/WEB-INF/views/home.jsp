@@ -13,6 +13,11 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
+<form action="#">
+	유저 등록 : <input type="text" name="userid"><br>
+</form>
+
+
 <!--  테스트로 해당 채팅방으로 보내주는 부분 -->
 <a href="./chatting/1">1번 채팅방</a><br>
 <a href="./chatting/2">1번 채팅방</a> <br>

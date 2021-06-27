@@ -22,6 +22,11 @@ var stompClient = null;
 // 채팅방 번호를 주소줄에서 잘라서 가져왔다. 
 var roomId = document.location.href.split('/')[5];
 
+$( document ).ready(function() {
+    console.log( "ready!" );
+    connect(); 
+});
+
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
