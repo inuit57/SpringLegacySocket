@@ -49,6 +49,8 @@
 	</bean>
 	<!-- SqlSessionTemplate 객체 -->
 	
-	<!-- com.itwillbs.persistence 패키지의 DAO 객체들과 연결 -->
-	<context:component-scan base-package="com.spring.persistence" />	
+	<!-- com.com.spring.persistence 패키지의 DAO 객체들과 연결 -->
+	<context:component-scan base-package="com.spring.persistence"/>	
+	<!-- com.itwillbs.service 패키지 연결 -->
+	<context:component-scan base-package="com.spring.service" />
 </beans>

@@ -7,8 +7,11 @@
 <mapper namespace="com.chatTest.mapper.roomMapper">
 
 	<insert id="insertRoomInfo">
- 		insert into tbl_room(roomid, room_name, max_usercnt	, room_manager) 
- 		values(#{roomid} , #{room_name} , #{max_usercnt} , #{room_manager} )
+ 		insert into tbl_room(roomName, maxUserCnt	, roomManager) 
+ 		values( #{roomName} , #{maxUserCnt} , #{roomManager} )
  	</insert>
 
+	<select id="selectRoomList" resultType="com.spring.domain.RoomInfoVO">
+		select * from tbl_room
+	</select>
 </mapper>

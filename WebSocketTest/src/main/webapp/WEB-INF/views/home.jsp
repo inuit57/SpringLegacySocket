@@ -18,6 +18,17 @@
 </form>
 
 
+<form action="./room/insert" method="post">
+	방 이름 : <input type="text" name="roomName"><br>
+	최대 인원 : <input type="number" name="maxUserCnt"><br>
+	방장 이름 : <input type="text" name="roomManager"><br>
+	<input type="submit" value="방 생성">
+</form>
+
+<hr>
+
+<h1><a href="./room/list">방 리스트</a></h1>
+
 <!--  테스트로 해당 채팅방으로 보내주는 부분 -->
 <a href="./chatting/1">1번 채팅방</a><br>
 <a href="./chatting/2">1번 채팅방</a> <br>
