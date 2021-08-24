@@ -70,7 +70,7 @@ function connect() {
 // 또한, DB 쪽에도 처리할 수 있도록 컨트롤러에게도 뭔가 보내줘야 한다. 
 function disconnect() {
 	
-	// stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+	//stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
 	
     if (stompClient !== null) {
         stompClient.disconnect();
