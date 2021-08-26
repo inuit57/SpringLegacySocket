@@ -11,7 +11,6 @@
 <body>
 	<h1>WebContent/room/list.jsp</h1>
 	
-
     <table border="1">
       <tr>
       	<td>방번호</td>

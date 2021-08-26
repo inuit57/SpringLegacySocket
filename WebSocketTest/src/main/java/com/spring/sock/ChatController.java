@@ -77,6 +77,9 @@ public class ChatController {
     	Date date = new Date(System.currentTimeMillis()); 
 	    SimpleDateFormat format = new SimpleDateFormat("HH:mm"); 
 	    String now_time = format.format(date); 
+	    
+	    // 채팅도 여기에서 저장해주자. 
+	    
 	    return new Chat(chat.getName(), chat.getMessage()+"---"+now_time );
     }
 	

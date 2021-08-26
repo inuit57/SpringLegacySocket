@@ -10,8 +10,8 @@
  	</select>
  
  	<insert id="insertChatMsg">
- 		insert into tbl_chatmsg(chatid, roomid, writer	, msg) 
- 		values(#{chatid} , #{roomid} , #{writer} , #{msg} )
+ 		insert into tbl_chatmsg( roomId, writer	, msg) 
+ 		values( #{roomId} , #{writer} , #{msg} )
  	</insert>
  	
  	

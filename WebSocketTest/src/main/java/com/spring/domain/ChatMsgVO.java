@@ -34,5 +34,11 @@ public class ChatMsgVO {
 	public void setChat_time(Timestamp chat_time) {
 		this.chat_time = chat_time;
 	}
+	public int getChatId() {
+		return chatId;
+	}
+	public void setChatId(int chatId) {
+		this.chatId = chatId;
+	}
 	
 }
