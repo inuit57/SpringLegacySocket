@@ -3,6 +3,8 @@ package com.spring.sock;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,9 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.HtmlUtils;
 
+import com.spring.domain.ChatMsgVO;
+import com.spring.service.ChatService;
+
 
 @Controller
 public class ChatController {
+	
+	@Inject
+	private ChatService cs ; 
 	
 	@RequestMapping("/chatting")
 	public String goChatRoom() {
@@ -78,7 +86,14 @@ public class ChatController {
 	    SimpleDateFormat format = new SimpleDateFormat("HH:mm"); 
 	    String now_time = format.format(date); 
 	    
-	    // 채팅도 여기에서 저장해주자. 
+	    // 채팅도 여기에서 저장해주자.
+	    
+	    ChatMsgVO cvo = new ChatMsgVO(); 
+	    cvo.setRoomId(Integer.parseInt(roomId));
+	    cvo.setWriter(chat.getName()); 
+	    cvo.setMsg(chat.getMessage()); 
+	    
+	    cs.saveChat(cvo); 
 	    
 	    return new Chat(chat.getName(), chat.getMessage()+"---"+now_time );
     }
