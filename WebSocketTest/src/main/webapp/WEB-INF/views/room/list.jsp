@@ -22,7 +22,7 @@
       <c:forEach var="room" items="${roomList }">
       <tr> 
       	<td>${room.roomId }</td>
-      	<td>${room.roomName }</td>
+      	<td><a href="/sock/chatting/${room.roomId }">${room.roomName }</a></td>
       	<td>${room.currUserCnt }</td>
       	<td>${room.maxUserCnt }</td>
       	<td>${room.roomManager }</td>

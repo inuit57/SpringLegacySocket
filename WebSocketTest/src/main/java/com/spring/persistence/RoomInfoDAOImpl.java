@@ -44,4 +44,23 @@ public class RoomInfoDAOImpl implements RoomInfoDAO {
 		return sqlSession.selectList(namespace +".selectRoomList");
 	}
 
+	@Override
+	public int getCurrUserCnt(int roomId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".selectRoomUserCnt", roomId) ;
+	}
+
+	@Override
+	public void updateCurrUserCnt(int roomId, Boolean isOut) {
+		if(!isOut) { // 들어온 경우 
+			sqlSession.update(namespace + ".updateRoomCnt1", roomId ); 
+		}else { //나간 경우 
+			sqlSession.update(namespace + ".updateRoomCnt2", roomId );
+		}
+	}
+
+	@Override
+	public int getMaxUserCnt(int roomId) {
+		return sqlSession.selectOne(namespace + ".selectRoomMaxCnt", roomId) ;
+	}
 }

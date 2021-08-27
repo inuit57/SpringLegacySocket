@@ -14,4 +14,20 @@
 	<select id="selectRoomList" resultType="com.spring.domain.RoomInfoVO">
 		select * from tbl_room
 	</select>
+	
+	<select id="selectRoomUserCnt" resultType="int">
+		select currUserCnt from tbl_room where roomId = #{roomId}
+	</select>
+	
+	<select id="selectRoomMaxCnt" resultType="int">
+		select maxUserCnt from tbl_room where roomId = #{roomId}
+	</select>
+	
+	<update id="updateRoomCnt1">
+		update tbl_room set currUserCnt = currUserCnt +1 where roomId = #{roomId} 
+	</update>
+	
+	<update id="updateRoomCnt2">
+		update tbl_room set currUserCnt = currUserCnt -1 where roomId = #{roomId} 
+	</update>
 </mapper>

@@ -10,6 +10,9 @@ public interface RoomService {
 	// 방 생성 동작 
 	public void insertRoom(RoomInfoVO rvo) throws Exception; 
 	
-	
 	public List<RoomInfoVO> getRoomList() throws Exception; 
+	
+	public int getCurrUserCnt(int roomId) throws Exception; 
+	
+	public void updateCurrUserCnt(int roomId, Boolean isOut) throws Exception;
 }

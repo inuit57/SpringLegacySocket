@@ -27,4 +27,15 @@ public class RoomServiceImpl implements RoomService {
 		rdao.insertRoomInfo(rvo);
 
 	}
+
+	@Override
+	public int getCurrUserCnt(int roomId) throws Exception {
+		// TODO Auto-generated method stub
+		return rdao.getCurrUserCnt(roomId); 
+	}
+
+	@Override
+	public void updateCurrUserCnt(int roomId, Boolean isOut) throws Exception {
+		rdao.updateCurrUserCnt(roomId, isOut); 
+	}
 }

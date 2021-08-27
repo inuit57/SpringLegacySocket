@@ -15,4 +15,11 @@ public interface RoomInfoDAO {
 	// 전체 방 정보 가져오기 
 	public List<RoomInfoVO> getRoomList() ; 
 	
+	
+	public int getCurrUserCnt(int roomId); 
+	
+	//selectRoomMaxCnt
+	public int getMaxUserCnt(int roomId);
+	
+	public void updateCurrUserCnt(int roomId, Boolean isOut); 
 }
