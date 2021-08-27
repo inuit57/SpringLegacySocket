@@ -27,6 +27,12 @@ $( document ).ready(function() {
     connect(); 
 });
 
+
+$(window).bind("beforeunload", function (e){
+	disconnect(); // 창 닫으면 연결 종료 되도록 처리 
+});
+
+
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
@@ -63,20 +69,29 @@ function connect() {
         stompClient.subscribe('/topic/chat/'+roomId, function (chat) {
     		showChat(JSON.parse(chat.body));
     	});
+        
+        stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name':'system', 'message': '환영합니다'}));
     });
+    
+    
 }
+
 
 // 연결 종료 시 방에서 퇴장하였다는 메시지를 출력해주고 방에서 나가게 할 것. 
 // 또한, DB 쪽에도 처리할 수 있도록 컨트롤러에게도 뭔가 보내줘야 한다. 
 function disconnect() {
 	
-	//stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
+	// 창 닫기 하였을 때도 소켓 닫게 하는 방법이 있을까? 
+	
+	stompClient.send("/app/chat/"+roomId, {}, JSON.stringify({'name':'system', 'message': $("#name").val()+'님이 방에서 나가셨습니다'}));
 	
     if (stompClient !== null) {
         stompClient.disconnect();
     }
     setConnected(false);
     console.log("Disconnected");
+    
+    location.href="/sock/room/list" ; 
 }
 
 function sendName() {
